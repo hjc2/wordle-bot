@@ -2,10 +2,7 @@
 from distutils import core
 from hashlib import new
 from operator import le
-
-
-def helloWorld():
-    print("hello world")
+from turtle import pos
 
 def green(words, letter, position):
     
@@ -15,9 +12,7 @@ def green(words, letter, position):
         if(word[position] == letter):
             newWords.append(word)
 
-    tup = (newWords, letter, position)
-    
-    return(tup)
+    return(newWords)
 
 def yellow(words, letter, position):
     
@@ -36,12 +31,22 @@ def yellow(words, letter, position):
 
 
 
-def grey(words, letter, correct, position):
+def grey(words, letter, position):
     newWords = []
 
     for word in words:
-            if(word.find(letter) == -1):
-                newWords.append(word)
+        if(word[position] != letter):
+            newWords.append(word)
     
+
     return(newWords)
 
+def greyExtra(words, letter, position):
+    
+    newWords = []
+    
+    for word in words:
+        if(word[position] != letter):
+            newWords.append(word)
+
+    newWords

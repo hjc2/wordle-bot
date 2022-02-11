@@ -4,3 +4,7 @@ geese
 tooth
 huzza
 whizz
+cream
+crane
+brain
+plane

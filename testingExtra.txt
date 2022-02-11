@@ -1,0 +1,32 @@
+word was "pause"
+
+
+words = grey(words, "c")
+words = grey(words, "r")
+words = grey(words, "n")
+words = yellow(words, "a", 2)
+words = green(words, "e", 4)
+
+words = grey(words, "g")
+words = grey(words, "l")
+#words = grey(words, "e")
+words = yellow(words, "a", 0)
+words = green(words, "e", 4)
+
+words = grey(words, "w")
+words = grey(words, "i")
+words = grey(words, "v")
+words = green(words, "a", 1)
+words = green(words, "e", 4)
+
+words = grey(words, "b")
+words = grey(words, "t")
+words = yellow(words, "s", 2)
+words = green(words, "a", 1)
+words = green(words, "e", 4)
+
+words = grey(words, "h")
+words = green(words, "u",2)
+words = green(words, "s", 3)
+words = green(words, "a", 1)
+words = green(words, "e", 4)
