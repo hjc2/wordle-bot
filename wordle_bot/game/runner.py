@@ -1,6 +1,6 @@
 
-from game.display import displayGrid
-from game.wordOps import green, yellow, greySolo, greyAll
+from wordle_bot.game.display import displayGrid
+from wordle_bot.game.wordOps import green, yellow, greySolo, greyAll
 
 def check(guess, correct):
     

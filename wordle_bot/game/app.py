@@ -1,5 +1,5 @@
 
-from game.runner import check, round, complete
+from wordle_bot.game.runner import check, round, complete
 
 def run():
 
