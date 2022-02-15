@@ -7,7 +7,6 @@ from display import check, displayGrid
 from wordOps import *
 
 
-
 def round(words, guess, correct):
     
     output = check(guess, correct)
@@ -15,30 +14,15 @@ def round(words, guess, correct):
     newWords = words
     
     for letter in range(0,5):
-        if(output[letter] == "g"):
+        if(output[letter] == "g"): #green box case
             newWords = green(newWords, guess[letter], letter)
-        elif(output[letter] == "y"):
+        elif(output[letter] == "y"): #yellow box case
             newWords = yellow(newWords, guess[letter], letter)
-        #elif(output[letter] == "b"):
-        #    newWords = greySolo(newWords, guess[letter], letter)  
-        
-        elif(output[letter] == "b"):  
-            
-            counted = 0
-            for counter in range(0,5):
-                if(guess[letter] == guess[counter]):
-                    counted += 1
-            if(counted > 1): #overlap case
-                newWords = greySolo(newWords, guess[letter], letter)
-            if guess[letter] not in correct:
-                newWords = greyAll(newWords, guess[letter], letter)
-            
-            
-        #elif(output[letter] == "b"):
-        #    if(correct.count(guess[letter]) > 1):
-        #        newWords = greySolo(newWords, guess[letter], letter)
-        #    elif(output.count(guess) == 1):
-        #        newWords = greyAll(newWords, guess[letter], letter)
+        elif(output[letter] == "b"): #grey box case
+            if guess[letter] not in correct: #no repeats
+                newWords = greyAll(newWords, guess[letter], letter) #purge all containing letter
+            else:
+                newWords = greySolo(newWords ,guess[letter], letter) #purge just this slot for this letter
             
     return(newWords)
 
