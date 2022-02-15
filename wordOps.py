@@ -3,19 +3,20 @@ from distutils import core
 from hashlib import new
 from operator import le
 from turtle import pos
+from typing import overload
 
-def green(words, letter, position):
-    
+def green(words, letter, position): #green box case
+    #purges all words without the letter in the position
     newWords = []
     
     for word in words:
-        if(word[position] == letter):
+        if(word[position] == letter): 
             newWords.append(word)
 
     return(newWords)
 
-def yellow(words, letter, position):
-    
+def yellow(words, letter, position): #yellow box case
+    #purges all words with the letter in position, but then adds all words with the letter (not in that position)
     staged = []
     newWords = []
     
@@ -30,8 +31,8 @@ def yellow(words, letter, position):
     return(newWords)
 
 
-
-def greySolo(words, letter, position):
+def greySolo(words, letter, position): #grey box case
+    #purges all words with the letter in the position
     newWords = []
 
     for word in words:
@@ -41,8 +42,8 @@ def greySolo(words, letter, position):
 
     return(newWords)
 
-def greyAll(words, letter, position):
-    
+def greyAll(words, letter): #grey box case (complete)
+    #purges all words containing the letter
     newWords = []
     for word in words:    
         if letter not in word:

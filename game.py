@@ -20,7 +20,7 @@ def round(words, guess, correct):
             newWords = yellow(newWords, guess[letter], letter)
         elif(output[letter] == "b"): #grey box case
             if guess[letter] not in correct: #no repeats
-                newWords = greyAll(newWords, guess[letter], letter) #purge all containing letter
+                newWords = greyAll(newWords, guess[letter]) #purge all containing letter
             else:
                 newWords = greySolo(newWords ,guess[letter], letter) #purge just this slot for this letter
             
