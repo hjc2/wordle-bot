@@ -31,7 +31,7 @@ def yellow(words, letter, position):
 
 
 
-def grey(words, letter, position):
+def greySolo(words, letter, position):
     newWords = []
 
     for word in words:
@@ -41,12 +41,11 @@ def grey(words, letter, position):
 
     return(newWords)
 
-def greyExtra(words, letter, position):
+def greyAll(words, letter, position):
     
     newWords = []
-    
-    for word in words:
-        if(word[position] != letter):
+    for word in words:    
+        if letter not in word:
             newWords.append(word)
 
-    newWords
+    return(newWords)
