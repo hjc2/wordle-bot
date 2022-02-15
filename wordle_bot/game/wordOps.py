@@ -1,10 +1,4 @@
 
-from distutils import core
-from hashlib import new
-from operator import le
-from turtle import pos
-from typing import overload
-
 def green(words, letter, position): #green box case
     #purges all words without the letter in the position
     newWords = []

@@ -1,11 +1,22 @@
 
-from hashlib import new
-from operator import le
-from random import randint
-from re import L
-from display import check, displayGrid
-from wordOps import *
+from game.display import displayGrid
+from game.wordOps import green, yellow, greySolo, greyAll
 
+def check(guess, correct):
+    
+    redone = list(correct)
+    grid = ""
+    for letter in range(0, 5):
+        if(guess[letter] == redone[letter]):
+            grid = grid + "g"
+            redone[letter] = "*"
+        elif guess[letter] not in redone:
+            grid = grid + "b"
+        elif guess[letter] in redone:
+            grid = grid + "y"
+            redone[letter] = "*"              
+            
+    return(grid)
 
 def round(words, guess, correct):
     
@@ -26,7 +37,7 @@ def round(words, guess, correct):
             
     return(newWords)
 
-def run(words, correct):
+def complete(words, correct):
     turns = 0
     errors = 0
     fails = 0

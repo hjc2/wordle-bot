@@ -1,4 +1,5 @@
-from display import *
+from wordle_bot.display import *
+from wordle_bot.game.app import *
 
 out = check("crane", "abbey")
 print(out)
