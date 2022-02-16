@@ -1,4 +1,5 @@
 
+from distutils.log import error
 from wordle_bot.game.display import displayGrid
 from wordle_bot.game.wordOps import green, yellow, greySolo, greyAll
 
@@ -34,13 +35,16 @@ def round(words, guess, correct):
                 newWords = greyAll(newWords, guess[letter]) #purge all containing letter
             else:
                 newWords = greySolo(newWords ,guess[letter], letter) #purge just this slot for this letter
-            
-    return(newWords)
+    
+    statistics = (newWords, output)
+
+    return(statistics)
 
 def complete(words, correct):
     turns = 0
     errors = 0
     fails = 0
+    guessList = []
     
     startWord = "crane"
     
@@ -48,17 +52,24 @@ def complete(words, correct):
     
     guess = startWord
     
-    print(correct)
+    #print(correct)
 
     while(len(newWords) > 1):
         
-        newWords = round(newWords, guess, correct)
+        guessList.append(guess)
         
-        print(displayGrid(check(guess, correct)) + " " + str(guess))
+        data = round(newWords, guess, correct)[0]
+        if(len(data) > 0):
+            newWords = round(newWords, guess, correct)[0]
+        else:
+            guess = correct
+            errors += 1
+        #print(displayGrid(check(guess, correct)) + " " + str(guess))
 
         if(turns >= 6):
             guess = correct
             fails += 1
+            newWords = [correct]
         if(guess == correct):
             newWords = [guess]
         else:
@@ -70,7 +81,7 @@ def complete(words, correct):
                     #    guess = newWords[randint(0,3)]
             
             elif(len(newWords) == 0):
-                print("ERROR")
+                #print("ERROR")
                 errors += 1
             
             #print(guess + ": " + str(turns))
@@ -81,8 +92,8 @@ def complete(words, correct):
                 #print("ERROR")
             #print(" ")
         
-    print("\n\n")
-    statistics = (newWords, turns, errors, fails)
+    #print("\n\n")
+    statistics = (turns, newWords, guessList)
     return(statistics)
         
     
