@@ -20,7 +20,7 @@ def run():
     #screen = curses.initscr()
 
     wordList = "../wordle-bot/wordle_bot/resources/wordleV2.txt" #THE LIST OF WORDS IN THE WORDLE DICTIONARY, MUST CONTAIN ALL ANSWERS 
-    answerList = "../wordle-bot/wordle_bot/resources/test.txt" #THE LIST OF ANSWERS YOU PROVIDE. wordList MUST CONTAIN ALL OF THESE STRINGS
+    answerList = "../wordle-bot/wordle_bot/resources/answerList.txt" #THE LIST OF ANSWERS YOU PROVIDE. wordList MUST CONTAIN ALL OF THESE STRINGS
 
     with open(wordList, newline='') as f: #loads the word list
         loaded_words = list(f)
@@ -51,7 +51,9 @@ def run():
     
     correctWords = []
     turnListing = []
-
+    
+    paragraph = 14
+    
     for word in answers:
         #turns 
         #correct
@@ -70,24 +72,46 @@ def run():
         words = saved
         statsList.append(complete(words, word))
         #statsList[len(statsList - 1)](0)
+        totalFails += statsList[len(statsList) - 1][5]
         
         turns = str(statsList[len(statsList) - 1][0])
         newWords = str(statsList[len(statsList) - 1][1])
         guessList = str(statsList[len(statsList) - 1][2])
         pLeft = str(statsList[len(statsList) - 1][3])
         diagram = statsList[len(statsList) - 1][4]
+        distribution = [0,0,0,0,0,0]
+        fails = totalFails
+            
+        for i in range(0, paragraph): #equal to # of printed lines
+            print("                                                                                 ")        
+        for i in range(0, paragraph): #equal to # of printed lines
+            print("\033[A", end="")
 
-        
         totalTurns += int(turns)
         totalWords += 1
         avg = str(totalTurns / totalWords)
         
         print("turns: " + turns)
         print("word: " + newWords)
-        print("\033[A", end="")
-        print("\033[A", end="")
+        print("guesses: " + guessList)
+        print("avg: " + avg)
+        print("dictionary: " + pLeft)        
+        for i in range(0, 6):
+            if(i < len(diagram)):
+                print(displayGrid(diagram[i]))
+            else:
+                print(" ")
+        for i in statsList:
+            distribution[i[0]] += 1
+        print("distribution: " + str(distribution))
+        print("fails: " + str(fails))
         
-        time.sleep(1)
+        print(str(len(statsList)) + " / " + str(len(answers)))
+
+        for i in range(0, paragraph): #equal to # of printed lines
+            print("\033[A", end="")
+        
+        time.sleep(0.005)
         
         #screen.clear()
         
@@ -118,7 +142,8 @@ def run():
         #totalTurns += turns
         #totalErrors += out[2]
         #totalFails += out[3]
-    print("")
+    for i in range(0, paragraph): #equal to # of printed lines
+            print("")
     #print(statsList[0][0])
     #avg = totalTurns / totalWords
 

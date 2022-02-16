@@ -2,6 +2,7 @@
 from distutils.log import error
 
 from numpy import diag
+from pytest import fail
 from wordle_bot.game.display import displayGrid
 from wordle_bot.game.wordOps import green, yellow, greySolo, greyAll
 
@@ -75,7 +76,7 @@ def complete(words, correct):
             errors += 1
         #print(displayGrid(check(guess, correct)) + " " + str(guess))
 
-        if(turns >= 6):
+        if(turns >= 5):
             guess = correct
             fails += 1
             newWords = [correct]
@@ -102,7 +103,7 @@ def complete(words, correct):
             #print(" ")
         
     #print("\n\n")
-    statistics = (turns, newWords, guessList, pLeft, diagram)
+    statistics = (turns, newWords, guessList, pLeft, diagram, fails)
     return(statistics)
         
     
