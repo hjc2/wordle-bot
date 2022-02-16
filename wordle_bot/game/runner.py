@@ -1,5 +1,7 @@
 
 from distutils.log import error
+
+from numpy import diag
 from wordle_bot.game.display import displayGrid
 from wordle_bot.game.wordOps import green, yellow, greySolo, greyAll
 
@@ -45,6 +47,8 @@ def complete(words, correct):
     errors = 0
     fails = 0
     guessList = []
+    pLeft = []
+    diagram = []
     
     startWord = "crane"
     
@@ -57,8 +61,13 @@ def complete(words, correct):
     while(len(newWords) > 1):
         
         guessList.append(guess)
+        pLeft.append(len(newWords))
+
+        rounder = round(newWords, guess, correct)
+        data = rounder[0]
         
-        data = round(newWords, guess, correct)[0]
+        diagram.append(rounder[1])
+        
         if(len(data) > 0):
             newWords = round(newWords, guess, correct)[0]
         else:
@@ -93,7 +102,7 @@ def complete(words, correct):
             #print(" ")
         
     #print("\n\n")
-    statistics = (turns, newWords, guessList)
+    statistics = (turns, newWords, guessList, pLeft, diagram)
     return(statistics)
         
     

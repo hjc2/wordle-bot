@@ -1,6 +1,11 @@
 
+from tkinter import dialog
+from turtle import color
 from wordle_bot.game.runner import check, round, complete
 import curses
+import colorama
+import time
+from wordle_bot.game.display import displayGrid
 
 #statistics:
 #word -> any character shenanigans
@@ -11,10 +16,11 @@ import curses
 
 def run():
 
-    screen = curses.initscr()
+    colorama.init()
+    #screen = curses.initscr()
 
     wordList = "../wordle-bot/wordle_bot/resources/wordleV2.txt" #THE LIST OF WORDS IN THE WORDLE DICTIONARY, MUST CONTAIN ALL ANSWERS 
-    answerList = "../wordle-bot/wordle_bot/resources/answerList.txt" #THE LIST OF ANSWERS YOU PROVIDE. wordList MUST CONTAIN ALL OF THESE STRINGS
+    answerList = "../wordle-bot/wordle_bot/resources/test.txt" #THE LIST OF ANSWERS YOU PROVIDE. wordList MUST CONTAIN ALL OF THESE STRINGS
 
     with open(wordList, newline='') as f: #loads the word list
         loaded_words = list(f)
@@ -68,19 +74,41 @@ def run():
         turns = str(statsList[len(statsList) - 1][0])
         newWords = str(statsList[len(statsList) - 1][1])
         guessList = str(statsList[len(statsList) - 1][2])
+        pLeft = str(statsList[len(statsList) - 1][3])
+        diagram = statsList[len(statsList) - 1][4]
 
+        
         totalTurns += int(turns)
         totalWords += 1
         avg = str(totalTurns / totalWords)
         
-        screen.addstr(1, 0, turns)
-        screen.addstr(2, 0, newWords)
-        screen.addstr(3, 0, guessList)
-        screen.addstr(4, 0, avg)
+        print("turns: " + turns)
+        print("word: " + newWords)
+        print("\033[A", end="")
+        print("\033[A", end="")
+        
+        time.sleep(1)
+        
+        #screen.clear()
+        
+        #screen.addstr(1, 0, "turns: " + turns)
+        #screen.addstr(2, 0, "word: " + newWords)
+        #screen.addstr(3, 0, "guesses:" + guessList)
+        #screen.addstr(4, 0, "avg: " + avg)
+        #screen.addstr(5, 0, "words left: " + pLeft)
+        
+        #screen.addstr(12, 2, displayGrid("ggbgg"))
+        #for i in range(6, 10):
+        #    screen.addstr(i, 0, 'string: ' + str(i))
+             
+        #for i in range(0,5):
+        #    screen.addstr(i + 11, 6, displayGrid(diagram[i]))
+            
+        #screen.refresh()
 
+        #curses.napms(5000)
         
-        screen.refresh()
-        
+
         #words = out[0]
         #turns = out[1]
         #correctWords.append(words)
@@ -90,6 +118,7 @@ def run():
         #totalTurns += turns
         #totalErrors += out[2]
         #totalFails += out[3]
+    print("")
     #print(statsList[0][0])
     #avg = totalTurns / totalWords
 
