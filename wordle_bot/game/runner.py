@@ -6,6 +6,8 @@ from pytest import fail
 from wordle_bot.game.display import displayGrid
 from wordle_bot.game.wordOps import green, yellow, greySolo, greyAll
 
+
+with open('../output.output.txt') as f:
 def check(guess, correct):
     
     redone = list(correct)
@@ -51,7 +53,7 @@ def complete(words, correct):
     pLeft = []
     diagram = []
     
-    startWord = "crane"
+    startWord = "adieu"
     
     newWords = words
     
@@ -103,7 +105,9 @@ def complete(words, correct):
             #print(" ")
         
     #print("\n\n")
-    statistics = (turns, newWords, guessList, pLeft, diagram, fails)
+    statistics = (turns + 1, newWords, guessList, pLeft, diagram, fails)
+    
+    
     return(statistics)
         
     

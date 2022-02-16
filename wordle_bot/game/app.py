@@ -19,8 +19,8 @@ def run():
     colorama.init()
     #screen = curses.initscr()
 
-    wordList = "../wordle-bot/wordle_bot/resources/wordleV2.txt" #THE LIST OF WORDS IN THE WORDLE DICTIONARY, MUST CONTAIN ALL ANSWERS 
-    answerList = "../wordle-bot/wordle_bot/resources/answerList.txt" #THE LIST OF ANSWERS YOU PROVIDE. wordList MUST CONTAIN ALL OF THESE STRINGS
+    wordList = "../wordle-bot/wordle_bot/resources/guessOfficial.txt" #THE LIST OF WORDS IN THE WORDLE DICTIONARY, MUST CONTAIN ALL ANSWERS 
+    answerList = "../wordle-bot/wordle_bot/resources/answerOfficial.txt" #THE LIST OF ANSWERS YOU PROVIDE. wordList MUST CONTAIN ALL OF THESE STRINGS
 
     with open(wordList, newline='') as f: #loads the word list
         loaded_words = list(f)
@@ -98,11 +98,13 @@ def run():
         print("dictionary: " + pLeft)        
         for i in range(0, 6):
             if(i < len(diagram)):
+                
                 print(displayGrid(diagram[i]))
             else:
                 print(" ")
         for i in statsList:
-            distribution[i[0]] += 1
+            distribution[i[0] - 1] += 1
+            
         print("distribution: " + str(distribution))
         print("fails: " + str(fails))
         
